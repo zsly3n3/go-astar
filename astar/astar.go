@@ -16,8 +16,8 @@ import (
 // WeightedNodes can be used to add nodes to be avoided like mud or mountains
 type Config struct {
 	GridWidth, GridHeight int
-	InvalidNodes          []*Node //常量
-	WeightedNodes         []*Node //常量
+	InvalidNodes          []*Node          //常量
+	WeightedNodes         map[string]*Node //常量
 }
 
 type astar struct {
@@ -61,25 +61,25 @@ func (a *astar) H(nodeA *Node, nodeB *Node) int {
 func (a *astar) GetNeighborNodes(node Node) []Node {
 	neighborNodes := make([]Node, 0, 4) //4个放向
 
-	upNode := Node{X: node.X, Y: node.Y + 1, parent: &node}
+	upNode := Node{X: node.X, Y: node.Y + 1, parent: &node, g: node.g + 1}
 	upNode.CreateTag()
 	if a.isAccessible(&upNode) {
 		neighborNodes = append(neighborNodes, upNode)
 	}
 
-	downNode := Node{X: node.X, Y: node.Y - 1, parent: &node}
+	downNode := Node{X: node.X, Y: node.Y - 1, parent: &node, g: node.g + 1}
 	downNode.CreateTag()
 	if a.isAccessible(&downNode) {
 		neighborNodes = append(neighborNodes, downNode)
 	}
 
-	leftNode := Node{X: node.X - 1, Y: node.Y, parent: &node}
+	leftNode := Node{X: node.X - 1, Y: node.Y, parent: &node, g: node.g + 1}
 	leftNode.CreateTag()
 	if a.isAccessible(&leftNode) {
 		neighborNodes = append(neighborNodes, leftNode)
 	}
 
-	rightNode := Node{X: node.X + 1, Y: node.Y, parent: &node}
+	rightNode := Node{X: node.X + 1, Y: node.Y, parent: &node, g: node.g + 1}
 	rightNode.CreateTag()
 	if a.isAccessible(&rightNode) {
 		neighborNodes = append(neighborNodes, rightNode)
@@ -150,29 +150,24 @@ func (a *astar) FindPath(startNode, endNode *Node) ([]*Node, error) {
 			if tf {
 				continue
 			}
-			a.calculateNode(&neighbor)
 			if !a.openList.Contains(neighbor.Tag) {
+				a.calculateNode(&neighbor)
 				a.openList.Add(neighbor)
 			}
 		}
 
 	}
 
-	return nil, errors.New("No path found")
+	return nil, errors.New(`No path found`)
 }
 
 // calculateNode calculates the F, G and H value for the given node
 func (a *astar) calculateNode(node *Node) {
-
-	node.g++
-
 	// check for special node weighting
-	for _, wNode := range a.config.WeightedNodes {
-		if node.X == wNode.X && node.Y == wNode.Y {
-			node.g = node.g + wNode.Weighting
-		}
+	wNode, tf := a.config.WeightedNodes[node.Tag]
+	if tf {
+		node.g = node.g + wNode.Weighting
 	}
-
 	node.h = a.H(node, a.endNode)
 	node.f = node.g + node.h
 }

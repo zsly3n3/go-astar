@@ -17,23 +17,23 @@ func TestAstar_H(t *testing.T) {
 		{X: 11, Y: 3, Tag: `11-3`},
 		{X: 9, Y: 2, Tag: `9-2`},
 		{X: 11, Y: 2, Tag: `11-2`},
-		//{X: 9, Y: 1, Tag: `9-1`},
-		//{X: 10, Y: 1, Tag: `10-1`},
-		//{X: 11, Y: 1, Tag: `11-1`},
+		{X: 9, Y: 1, Tag: `9-1`},
+		{X: 10, Y: 1, Tag: `10-1`},
+		{X: 11, Y: 1, Tag: `11-1`},
 	}
-	//w := 1
-	waterNodes := []*Node{
-		//{X: 4, Y: 1, Weighting: w, Tag: `4-1`},
-		//{X: 4, Y: 2, Weighting: w, Tag: `4-2`},
-		//{X: 5, Y: 1, Weighting: w, Tag: `5-1`},
-		//{X: 5, Y: 2, Weighting: w, Tag: `5-2`},
-		//{X: 5, Y: 3, Weighting: w, Tag: `5-3`},
-		//{X: 5, Y: 4, Weighting: w, Tag: `5-4`},
-		//{X: 6, Y: 1, Weighting: w, Tag: `6-1`},
-		//{X: 6, Y: 2, Weighting: w, Tag: `6-2`},
-		//{X: 6, Y: 3, Weighting: w, Tag: `6-3`},
-		//{X: 7, Y: 2, Weighting: w, Tag: `7-2`},
-	}
+
+	w := 20
+	waterNodes := make(map[string]*Node)
+	waterNodes[`4-1`] = &Node{X: 4, Y: 1, Weighting: w}
+	waterNodes[`4-2`] = &Node{X: 4, Y: 2, Weighting: w}
+	waterNodes[`5-1`] = &Node{X: 5, Y: 1, Weighting: w}
+	waterNodes[`5-2`] = &Node{X: 5, Y: 2, Weighting: w}
+	waterNodes[`5-3`] = &Node{X: 5, Y: 3, Weighting: w}
+	waterNodes[`5-4`] = &Node{X: 5, Y: 4, Weighting: w}
+	waterNodes[`6-1`] = &Node{X: 6, Y: 1, Weighting: w}
+	waterNodes[`6-2`] = &Node{X: 6, Y: 2, Weighting: w}
+	waterNodes[`6-3`] = &Node{X: 6, Y: 3, Weighting: w}
+	waterNodes[`7-2`] = &Node{X: 7, Y: 2, Weighting: w}
 
 	// set nodes to the config
 	aConfig := &Config{
