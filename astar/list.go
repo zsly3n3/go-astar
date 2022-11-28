@@ -18,10 +18,6 @@ func NewList() *List {
 
 // Add one or more nodes to the list
 func (l *List) Add(nodes ...Node) {
-	length := len(nodes)
-	if length <= 0 {
-		return
-	}
 	for _, v := range nodes {
 		l.nodes[v.Tag] = v
 	}
