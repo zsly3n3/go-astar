@@ -21,10 +21,10 @@ type Config struct {
 }
 
 type astar struct {
-	config             *Config             //常量
-	openList           *List               //递增
 	closedList         map[string]struct{} //递增
 	startNode, endNode *Node               //常量
+	openList           *List               //递增
+	config             *Config             //常量
 }
 
 // New creates a new astar instance
