@@ -7,8 +7,8 @@ import (
 
 func main() {
 
-	startNode := &astar.Node{X: 1, Y: 2}
-	endNode := &astar.Node{X: 10, Y: 2}
+	startNode := &astar.Node{X: 10, Y: 2}
+	endNode := &astar.Node{X: 1, Y: 2}
 	startNode.CreateTag()
 	endNode.CreateTag()
 
@@ -18,9 +18,9 @@ func main() {
 		{X: 11, Y: 3, Tag: `11-3`},
 		{X: 9, Y: 2, Tag: `9-2`},
 		{X: 11, Y: 2, Tag: `11-2`},
-		//{X: 9, Y: 1, Tag: `9-1`},
-		//{X: 10, Y: 1, Tag: `10-1`},
-		//{X: 11, Y: 1, Tag: `11-1`},
+		{X: 9, Y: 1, Tag: `9-1`},
+		{X: 10, Y: 1, Tag: `10-1`},
+		{X: 11, Y: 1, Tag: `11-1`},
 	}
 	w := 20
 	waterNodes := make(map[string]*astar.Node)

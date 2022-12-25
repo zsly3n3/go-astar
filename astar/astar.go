@@ -135,8 +135,6 @@ func (a *astar) FindPath(startNode, endNode *Node) ([]*Node, error) {
 			return nil, fmt.Errorf("cannot get minF node %v", err)
 		}
 
-		a.openList.Remove(currentNode.Tag)
-
 		a.closedList[currentNode.Tag] = struct{}{}
 
 		// we found the path
@@ -158,7 +156,7 @@ func (a *astar) FindPath(startNode, endNode *Node) ([]*Node, error) {
 
 	}
 
-	return nil, errors.New(`No path found`)
+	return nil, errors.New(`no path found`)
 }
 
 // calculateNode calculates the F, G and H value for the given node

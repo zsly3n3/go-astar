@@ -6,26 +6,28 @@ import (
 )
 
 func TestAstar_H(t *testing.T) {
+
 	startNode := &Node{X: 1, Y: 2}
 	endNode := &Node{X: 10, Y: 2}
 	startNode.CreateTag()
 	endNode.CreateTag()
 
 	obstacleNodes := []*Node{
-		{X: 9, Y: 3, Tag: `9-3`},
-		{X: 10, Y: 3, Tag: `10-3`},
-		{X: 11, Y: 3, Tag: `11-3`},
+		//{X: 9, Y: 3, Tag: `9-3`},
+		//{X: 10, Y: 3, Tag: `10-3`},
+		//{X: 11, Y: 3, Tag: `11-3`},
 		{X: 9, Y: 2, Tag: `9-2`},
 		{X: 11, Y: 2, Tag: `11-2`},
-		{X: 9, Y: 1, Tag: `9-1`},
-		//{X: 10, Y: 1, Tag: `10-1`},
-		//{X: 11, Y: 1, Tag: `11-1`},
-	}
 
+		{X: 9, Y: 1, Tag: `9-1`},
+		{X: 10, Y: 1, Tag: `10-1`},
+		{X: 11, Y: 1, Tag: `11-1`},
+	}
 	w := 20
 	waterNodes := make(map[string]*Node)
 	waterNodes[`4-1`] = &Node{X: 4, Y: 1, Weighting: w}
 	waterNodes[`4-2`] = &Node{X: 4, Y: 2, Weighting: w}
+	waterNodes[`5-0`] = &Node{X: 5, Y: 0, Weighting: w}
 	waterNodes[`5-1`] = &Node{X: 5, Y: 1, Weighting: w}
 	waterNodes[`5-2`] = &Node{X: 5, Y: 2, Weighting: w}
 	waterNodes[`5-3`] = &Node{X: 5, Y: 3, Weighting: w}
@@ -69,4 +71,5 @@ func TestAstar_H(t *testing.T) {
 	for _, node := range foundPath {
 		fmt.Println(node)
 	}
+
 }
